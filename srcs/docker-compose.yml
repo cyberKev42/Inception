@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mariadb:
+    # We'll fill this in when we build MariaDB
+
+  wordpress:
+    # We'll fill this in when we build WordPress
+
+  nginx:
+    # We'll fill this in when we build NGINX
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/kbrauer/data/wordpress
+      o: bind
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/kbrauer/data/mariadb
+      o: bind
