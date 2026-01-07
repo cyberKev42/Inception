@@ -53,4 +53,4 @@ if [ ! -f "wp-config.php" ]; then
 fi
 
 echo "Starting PHP-FPM..."
-exec php-fpm7.4 -F
+exec php-fpm -F
