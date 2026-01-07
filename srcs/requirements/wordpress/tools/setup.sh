@@ -6,7 +6,7 @@ set -e
 echo "Waiting for MariaDB to be ready..."
 TIMEOUT=60
 ELAPSED=0
-while ! mysqladmin ping -h mariadb --silent 2>/dev/null; do
+while ! mysql -h mariadb -u ${MYSQL_USER} -p${MYSQL_PASSWORD} -e "SELECT 1" &>/dev/null; do
     if [ $ELAPSED -ge $TIMEOUT ]; then
         echo "ERROR: MariaDB did not become ready in time"
         exit 1
@@ -34,7 +34,7 @@ if [ ! -f "wp-config.php" ]; then
 
     echo "Installing WordPress..."
     wp core install \
-        --url=${DOMAIN_NAME} \
+        --url=https://${DOMAIN_NAME} \
         --title="${WP_TITLE}" \
         --admin_user=${WP_ADMIN_USER} \
         --admin_password=${WP_ADMIN_PASSWORD} \
@@ -53,4 +53,4 @@ if [ ! -f "wp-config.php" ]; then
 fi
 
 echo "Starting PHP-FPM..."
-exec php-fpm -F
+exec php-fpm8.4 -F

@@ -28,8 +28,8 @@ clean: down
 	@docker system prune -af
 
 fclean: clean
-	@rm -rf /home/kbrauer/data/wordpress/*
-	@rm -rf /home/kbrauer/data/mariadb/*
+	@sudo rm -rf /home/kbrauer/data/wordpress/*
+	@sudo rm -rf /home/kbrauer/data/mariadb/*
 	@docker volume rm -f srcs_wordpress srcs_mariadb 2>/dev/null || true
 
 re: fclean all
