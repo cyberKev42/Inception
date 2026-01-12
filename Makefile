@@ -30,7 +30,7 @@ clean: down
 fclean: clean
 	@sudo rm -rf /home/kbrauer/data/wordpress/*
 	@sudo rm -rf /home/kbrauer/data/mariadb/*
-	@docker volume rm -f srcs_wordpress srcs_mariadb 2>/dev/null || true
+	@docker volume rm -f wordpress mariadb 2>/dev/null
 
 re: fclean all
 

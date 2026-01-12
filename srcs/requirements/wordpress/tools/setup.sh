@@ -3,7 +3,7 @@
 # stop if anything fails
 set -e
 
-# wait for MariaDB to be ready
+# wait for mariadb to be ready
 echo "Waiting for MariaDB to be ready..."
 TIMEOUT=60
 COUNT=0
@@ -17,7 +17,6 @@ while ! mysql -h mariadb -u ${MYSQL_USER} -p${MYSQL_PASSWORD} -e "SELECT 1" &>/d
 done
 echo "MariaDB is ready!"
 
-# go to wordpress directory
 cd /var/www/html
 
 # download wordpress if not present

@@ -3,10 +3,6 @@
 # stop script if something fails
 set -e
 
-# create socket directory
-mkdir -p /run/mysqld
-chown mysql:mysql /run/mysqld
-
 # check if this is the first run (database not initialized)
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB data directory..."
@@ -18,7 +14,7 @@ if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     echo "Starting temporary MariaDB server..."
     mysqld --user=mysql &
     
-    # wait for MariaDB to be ready
+    # wait for mariadb to be ready
     until mysqladmin ping --silent 2>/dev/null; do
         sleep 1
     done

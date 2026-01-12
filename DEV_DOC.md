@@ -15,7 +15,6 @@ inception/
 ├── README.md                # Project overview
 ├── USER_DOC.md              # User documentation
 ├── DEV_DOC.md               # Developer documentation
-├── secrets/                 # Secret files (gitignored)
 └── srcs/
     ├── .env                 # Environment variables
     ├── docker-compose.yml   # Service orchestration
@@ -36,7 +35,7 @@ inception/
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone <repository-url> inception
 cd inception
 ```
 

@@ -52,16 +52,19 @@ services:
 
 networks:
   inception:
+    name: inception
     driver: bridge
 
 volumes:
   wordpress:
+    name: wordpress
     driver: local
     driver_opts:
       type: none
       device: /home/kbrauer/data/wordpress
       o: bind
   mariadb:
+    name: mariadb
     driver: local
     driver_opts:
       type: none

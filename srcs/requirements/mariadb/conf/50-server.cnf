@@ -1,13 +1,13 @@
 [mysqld]
 
-# Accept connections from all services, necessary for wordress
+# accept connections from all services
 bind-address = 0.0.0.0
 
-# Port to listen on
+# port to listen on
 port = 3306
 
-# User that runs the mysqld process
+# user that runs the mysqld process
 user = mysql
 
-# Data directory
+# data directory
 datadir = /var/lib/mysql
