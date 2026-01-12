@@ -1,5 +1,6 @@
 [mysqld]
-# Accept connections from any IP (required for Docker networking)
+
+# Accept connections from all services, necessary for wordress
 bind-address = 0.0.0.0
 
 # Port to listen on
@@ -8,11 +9,5 @@ port = 3306
 # User that runs the mysqld process
 user = mysql
 
-# Data directory (where database files are stored)
+# Data directory
 datadir = /var/lib/mysql
-
-# Socket for local connections
-socket = /run/mysqld/mysqld.sock
-
-# Skip DNS resolution for faster connections
-skip-name-resolve

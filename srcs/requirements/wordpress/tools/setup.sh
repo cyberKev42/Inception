@@ -1,25 +1,26 @@
 #!/bin/bash
 
+# stop if anything fails
 set -e
 
-# Wait for MariaDB to be ready
+# wait for MariaDB to be ready
 echo "Waiting for MariaDB to be ready..."
 TIMEOUT=60
-ELAPSED=0
+COUNT=0
 while ! mysql -h mariadb -u ${MYSQL_USER} -p${MYSQL_PASSWORD} -e "SELECT 1" &>/dev/null; do
-    if [ $ELAPSED -ge $TIMEOUT ]; then
+    if [ $COUNT -ge $TIMEOUT ]; then
         echo "ERROR: MariaDB did not become ready in time"
         exit 1
     fi
     sleep 2
-    ELAPSED=$((ELAPSED + 2))
+    COUNT=$((COUNT + 2))
 done
 echo "MariaDB is ready!"
 
-# Go to WordPress directory
+# go to wordpress directory
 cd /var/www/html
 
-# Download WordPress if not present
+# download wordpress if not present
 if [ ! -f "wp-config.php" ]; then
     echo "Downloading WordPress..."
     wp core download --allow-root

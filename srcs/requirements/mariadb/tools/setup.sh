@@ -1,23 +1,24 @@
 #!/bin/bash
 
+# stop script if something fails
 set -e
 
-# Create socket directory
+# create socket directory
 mkdir -p /run/mysqld
 chown mysql:mysql /run/mysqld
 
-# Check if this is first run (database not initialized)
+# check if this is the first run (database not initialized)
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB data directory..."
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
 fi
 
-# Check if our database exists (if not, we need to set up users)
+# check if database exists and set up user if not
 if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     echo "Starting temporary MariaDB server..."
     mysqld --user=mysql &
     
-    # Wait for MariaDB to be ready
+    # wait for MariaDB to be ready
     until mysqladmin ping --silent 2>/dev/null; do
         sleep 1
     done
@@ -37,9 +38,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 FLUSH PRIVILEGES;
 EOF
 
-    echo "Database setup complete."
-    
-    # Stop temporary server
+    # stop temporary server
     mysqladmin -u root -p${MYSQL_ROOT_PASSWORD} shutdown
 fi
 

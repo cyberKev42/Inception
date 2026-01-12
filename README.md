@@ -49,6 +49,11 @@ make re
 - [NGINX Documentation](https://nginx.org/en/docs/)
 - [MariaDB Documentation](https://mariadb.com/kb/en/documentation/)
 
+### Sources
+- [Google](https://google.com/)
+- [StackOverflow](https://https://stackoverflow.com/)
+- [YouTube](https://https://youtube.com/)
+
 ### AI Usage
 AI was used during this project for:
 - Understanding Docker concepts and best practices
