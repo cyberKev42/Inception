@@ -1,4 +1,4 @@
-FROM debian:trixie
+FROM debian:bookworm
 
 # install basic php tools
 RUN apt-get update && apt-get install -y \

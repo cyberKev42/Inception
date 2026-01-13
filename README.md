@@ -12,6 +12,52 @@ This project sets up a small infrastructure composed of different services using
 
 All services run in separate containers connected via a Docker bridge network, with persistent data stored in volumes.
 
+### Virtual Machines vs Docker
+
+| Virtual Machines          | Docker                  |
+|---------------------------|-------------------------|
+| Full OS with own kernel   | Shares host kernel      |
+| Heavy resource usage (GB) | Lightweight (MB)        |
+| Slow startup (minutes)    | Fast startup (seconds)  |
+| Complete isolation        | Process-level isolation |
+| Hardware virtualization   | OS-level virtualization |
+
+Docker is more efficient for running applications because containers share the host's kernel instead of running a complete operating system.
+
+### Secrets vs Environment Variables
+
+| Secrets                                 | Environment Variables   |
+|-----------------------------------------|-------------------------|
+| Encrypted at rest                       | Stored as plain text    |
+| Mounted as files in container           | Available as variables  |
+| More secure for sensitive data          | Easier to use           |
+| Requires Docker Swarm or external tools | Works with basic Docker |
+
+Environment variables are simpler but less secure. Secrets should be used for sensitive data like passwords in production.
+
+### Docker Network vs Host Network
+
+| Docker Network (Bridge)        | Host Network                     |
+|--------------------------------|----------------------------------|
+| Isolated network namespace     | Uses host's network directly     |
+| Containers communicate by name | No DNS resolution for containers |
+| Port mapping required          | No port mapping needed           |
+| Better security                | Less secure                      |
+| Default and recommended        | Used for specific cases          |
+
+This project uses a bridge network for container isolation and DNS-based service discovery.
+
+### Docker Volumes vs Bind Mounts
+
+| Docker Volumes                     | Bind Mounts          |
+|------------------------------------|----------------------|
+| Managed by Docker                  | Direct path on host  |
+| Stored in /var/lib/docker/volumes  | Any location on host |
+| Better portability                 | Host-dependent       |
+| Easier backup with Docker commands | Manual backup        |
+
+This project uses bind mounts with `driver_opts` to store data in `/home/kbrauer/data/` as required by the subject.
+
 ## Instructions
 
 ### Prerequisites

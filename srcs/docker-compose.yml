@@ -38,7 +38,15 @@ services:
       - mariadb
 
   nginx:
-    build: ./requirements/nginx
+    build:
+      context: ./requirements/nginx
+      args:
+        - CERT_COUNTRY=${CERT_COUNTRY}
+        - CERT_STATE=${CERT_STATE}
+        - CERT_LOCALITY=${CERT_LOCALITY}
+        - CERT_ORG=${CERT_ORG}
+        - CERT_OU=${CERT_OU}
+        - CERT_CN=${CERT_CN}
     container_name: nginx
     restart: unless-stopped
     networks:
