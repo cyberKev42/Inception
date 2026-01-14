@@ -2,7 +2,7 @@
 services:
   mariadb:
     build: ./requirements/mariadb
-    container_name: mariadb
+    image: mariadb
     restart: unless-stopped
     networks:
       - inception
@@ -16,7 +16,7 @@ services:
 
   wordpress:
     build: ./requirements/wordpress
-    container_name: wordpress
+    image: wordpress
     restart: unless-stopped
     networks:
       - inception
@@ -47,7 +47,7 @@ services:
         - CERT_ORG=${CERT_ORG}
         - CERT_OU=${CERT_OU}
         - CERT_CN=${CERT_CN}
-    container_name: nginx
+    image: nginx
     restart: unless-stopped
     networks:
       - inception

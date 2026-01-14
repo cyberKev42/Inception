@@ -9,7 +9,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
 fi
 
-# Create init file if database doesn't exist
+# create init file if database doesn't exist
 if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     echo "Creating initialization file..."
     cat > /tmp/init.sql << EOF

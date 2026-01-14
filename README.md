@@ -105,5 +105,6 @@ AI was used during this project for:
 - Understanding Docker concepts and best practices
 - Debugging configuration issues
 - Learning about service communication in containerized environments
+- Creating project documentation
 
 All AI-generated suggestions were reviewed, understood, and adapted to fit the project requirements.
