@@ -17,9 +17,9 @@ All services run in separate containers connected via a Docker bridge network, w
 ```
                         ┌─────────────────────────────────────────┐
                         │          Docker Network: inception      │
-    :443 (HTTPS)        │                                         │
-   ──────────────►┌───────────┐    :9000     ┌───────────┐        │
-                  │   NGINX   │─────────────►│ WordPress │        │
+                        │                                         │
+     :443 (HTTPS) ┌───────────┐    :9000     ┌───────────┐        │
+   ──────────────►│   NGINX   │─────────────►│ WordPress │        │
                   │  (TLS 1.2/│  (FastCGI)   │ (PHP-FPM) │        │
                   │   1.3)    │              └─────┬─────┘        │
                   └───────────┘                    │              │
