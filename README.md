@@ -12,6 +12,30 @@ This project sets up a small infrastructure composed of different services using
 
 All services run in separate containers connected via a Docker bridge network, with persistent data stored in volumes.
 
+### Architecture
+
+```
+                        ┌─────────────────────────────────────────┐
+                        │          Docker Network: inception      │
+    :443 (HTTPS)        │                                         │
+   ──────────────►┌───────────┐    :9000     ┌───────────┐       │
+                  │   NGINX   │─────────────►│ WordPress │       │
+                  │  (TLS 1.2/│  (FastCGI)   │ (PHP-FPM) │       │
+                  │   1.3)    │              └─────┬─────┘       │
+                  └───────────┘                    │              │
+                        │                     :3306│              │
+                        │                  ┌───────▼─────┐       │
+                        │                  │   MariaDB   │       │
+                        │                  └─────────────┘       │
+                        └─────────────────────────────────────────┘
+                              │                    │
+                     ┌────────▼────────┐  ┌────────▼────────┐
+                     │   Volume:       │  │   Volume:       │
+                     │   wordpress     │  │   mariadb       │
+                     │ ~/data/wordpress│  │ ~/data/mariadb  │
+                     └─────────────────┘  └─────────────────┘
+```
+
 ### Virtual Machines vs Docker
 
 | Virtual Machines          | Docker                  |
@@ -70,13 +94,25 @@ This project uses bind mounts with `driver_opts` to store data in `/home/kbrauer
 # Build and start all services
 make
 
-# Stop services
+# Stop services (removes containers)
 make down
+
+# Stop services (keeps containers)
+make stop
+
+# Start stopped services
+make start
+
+# Restart services
+make restart
 
 # View logs
 make logs
 
-# Full cleanup (removes all data)
+# Stop + prune Docker system
+make clean
+
+# Full cleanup (removes all data and volumes)
 make fclean
 
 # Rebuild from scratch
@@ -94,11 +130,6 @@ make re
 - [WordPress Documentation](https://developer.wordpress.org/)
 - [NGINX Documentation](https://nginx.org/en/docs/)
 - [MariaDB Documentation](https://mariadb.com/kb/en/documentation/)
-
-### Sources
-- [Google](https://google.com/)
-- [StackOverflow](https://https://stackoverflow.com/)
-- [YouTube](https://https://youtube.com/)
 
 ### AI Usage
 AI was used during this project for:
